@@ -1,0 +1,17 @@
+			c_middlesex = {
+				color = { 230 5 5 }
+				color2 = { 255 255 255 }
+
+				b_london = {
+					province = 1527
+
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+				}
+				b_southwark = {
+					province = 1526
+
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+				}
+            }

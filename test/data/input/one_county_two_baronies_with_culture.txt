@@ -1,0 +1,100 @@
+e_britannia = {
+	color = { 172 22 22 }
+	color2 = { 255 255 255 }
+
+	capital = c_middlesex
+
+	cultural_names = {
+		pictish = cn_pictavia
+		irish = cn_alba
+		gaelic = cn_alba
+	}
+
+	ai_primary_priority = {
+		if = {
+			limit = {
+				OR = {
+					culture_group = culture_group:west_germanic_group
+					culture_group = culture_group:goidelic_group
+					culture_group = culture_group:brythonic_group
+				}
+			}
+			add = @correct_culture_primary_score
+		}
+	}
+
+	k_england = {
+		color = { 202 26 26 }
+		color2 = { 255 255 255 }
+
+		capital = c_middlesex
+
+		ai_primary_priority = {
+			if = {
+				limit = {
+					OR = {
+						culture = culture:english
+						culture = culture:anglo_saxon
+					}
+				}
+				add = @correct_culture_primary_score
+			}
+		}
+
+		d_bedford = { # Essex
+			color = { 241 15 15 }
+			color2 = { 255 255 255 }
+
+			capital = c_middlesex
+
+			cultural_names = {
+				anglo_saxon = cn_east_seaxe
+				old_saxon = cn_east_seaxe
+			}
+
+			c_middlesex = {
+				color = { 230 5 5 }
+				color2 = { 255 255 255 }
+
+				cultural_names = {
+					anglo_saxon = cn_middle_seaxe
+					old_saxon = cn_middle_seaxe
+				}
+
+				b_london = {
+					province = 1527
+
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+
+					cultural_names = {
+						anglo_saxon = cn_lunden
+						old_saxon = cn_lunden
+
+						roman = cn_londinium
+
+						welsh = cn_llundein
+						cornish = cn_llundein
+						breton = cn_llundein
+						cumbrian = cn_llundein
+						pictish = cn_llundein
+
+						norman = cn_londres
+						scottish = cn_lunnon
+					}
+				}
+				b_southwark = {
+					province = 1526
+
+					cultural_names = {
+						anglo_saxon = cn_suthweorc
+						old_saxon = cn_suthweorc
+					}
+
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+				}
+            }
+        }
+   }
+}
