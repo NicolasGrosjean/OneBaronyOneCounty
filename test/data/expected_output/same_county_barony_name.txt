@@ -1,4 +1,4 @@
-			c_middlesex = {
+			c_london = {
 				color = { 230 5 5 }
 				color2 = { 255 255 255 }
 
@@ -8,11 +8,11 @@
 					color2 = { 255 255 255 }
 				}
 			}
-			c_southwark = {
+			c_middlesex = {
 				color = { 230 5 5 }
 				color2 = { 255 255 255 }
-
-				b_southwark = {
+				
+				b_middlesex = {
 					province = 1526
 					color = { 230 5 5 }
 					color2 = { 255 255 255 }

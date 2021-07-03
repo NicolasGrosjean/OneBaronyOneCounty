@@ -55,7 +55,6 @@ e_britannia = {
 			c_middlesex = {
 				color = { 230 5 5 }
 				color2 = { 255 255 255 }
-
 				cultural_names = {
 					anglo_saxon = cn_middle_seaxe
 					old_saxon = cn_middle_seaxe
@@ -63,22 +62,17 @@ e_britannia = {
 
 				b_london = {
 					province = 1527
-
 					color = { 230 5 5 }
 					color2 = { 255 255 255 }
-
 					cultural_names = {
 						anglo_saxon = cn_lunden
 						old_saxon = cn_lunden
-
 						roman = cn_londinium
-
 						welsh = cn_llundein
 						cornish = cn_llundein
 						breton = cn_llundein
 						cumbrian = cn_llundein
 						pictish = cn_llundein
-
 						norman = cn_londres
 						scottish = cn_lunnon
 					}

@@ -4,17 +4,14 @@
 
 				b_london = {
 					province = 1527
-					color = { 230 5 5 }
-					color2 = { 255 255 255 }
-				}
-			}
-			c_southwark = {
-				color = { 230 5 5 }
-				color2 = { 255 255 255 }
 
-				b_southwark = {
-					province = 1526
 					color = { 230 5 5 }
 					color2 = { 255 255 255 }
 				}
-			}
+				b_middlesex = {
+					province = 1526
+
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+				}
+            }
