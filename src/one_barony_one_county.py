@@ -71,7 +71,19 @@ def parse_barony(input_lines: list, line_index: int):
             tokens = line.strip().split('=')
             if len(tokens) > 2:
                 raise Exception(f'Too much = in {line}')
-            barony_attributes[tokens[0].replace(' ', '')] = tokens[1]
+            key = tokens[0].replace(' ', '')
+            value = tokens[1]
+            if value.count("{") > value.count("}"):
+                value = [value + '\n']
+                i += 1
+                attribute_line = input_lines[i]
+                while '}' not in attribute_line:
+                    value.append(attribute_line)
+                    i += 1
+                    attribute_line = input_lines[i]
+                value.append(attribute_line)
+                bracket_level -= 1
+            barony_attributes[key] = value
         bracket_level += line.count("{") - line.count("}")
     return barony_name, barony_attributes, i
 
