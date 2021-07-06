@@ -20,10 +20,10 @@ def format_lines(lines: list) -> list:
     if not format_needed:
         return lines
     else:
-        print(f'WARNING : Invalid format detected (in line {line[:-1]}, we try to solve it but it can cause some bugs')
         res = []
         for line in lines:
             if need_format(line):
+                print(f'WARNING : Invalid format detected (in line {line[:-1]}, we try to solve it but it can cause some bugs')
                 split_line = line.split('{')
                 tab_nb = split_line[0].count('\t')
                 for l in split_line:
@@ -39,10 +39,10 @@ def need_format(line: str) -> bool:
     """
     Return true if line as a title declaration followed by content
     """
-    return (re.search('\t+e_\w*\W*=', line) is not None and re.search('\t+e_\w*\W*=\W*{\n', line) is None and re.search('\t+e_\w*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+k_\w*\W*=', line) is not None and re.search('\t+k_\w*\W*=\W*{\n', line) is None and re.search('\t+k_\w*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+d_\w*\W*=', line) is not None and re.search('\t+d_\w*\W*=\W*{\n', line) is None and re.search('\t+d_\w*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+c_\w*\W*=', line) is not None and re.search('\t+c_\w*\W*=\W*{\n', line) is None and re.search('\t+c_\w*\W*=\W*{\W*#', line) is None)
+    return (re.search('\t+e_\w*\W*=', line) is not None and re.search('\t+e_\w*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+e_\w*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+k_\w*\W*=', line) is not None and re.search('\t+k_\w*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+k_\w*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+d_\w*\W*=', line) is not None and re.search('\t+d_\w*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+d_\w*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+c_\w*\W*=', line) is not None and re.search('\t+c_\w*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+c_\w*\W*=\W*{\W*#', line) is None)
 
 
 def parse_and_edit_lines(input_lines: list) -> list:
