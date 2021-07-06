@@ -77,9 +77,15 @@ def parse_county(input_lines: list, line_index: int, counties: set):
         i += 1
         line = input_lines[i]
         if '=' in line:
-            tokens = line.strip().split('=')
+            if '#' in line:
+                tokens = line.split('#')[0].strip().split('=')
+            else:
+                tokens = line.strip().split('=')
             if len(tokens) > 2:
                 raise Exception(f'Too much = in {line}')
+            elif len(tokens) == 1:
+                # The equal is in fact in a comment,
+                continue
             if tokens[0].startswith('b_'):
                 barony_name, barony_attributes, i = parse_barony(input_lines, i)
                 barony_with_county_name = barony_with_county_name | (barony_name == county_name)
@@ -106,9 +112,15 @@ def parse_barony(input_lines: list, line_index: int):
         i += 1
         line = input_lines[i]
         if '=' in line:
-            tokens = line.strip().split('=')
+            if '#' in line:
+                tokens = line.split('#')[0].strip().split('=')
+            else:
+                tokens = line.strip().split('=')
             if len(tokens) > 2:
                 raise Exception(f'Too much = in {line}')
+            elif len(tokens) == 1:
+                # The equal is in fact in a comment,
+                continue
             value, i, bracket_level = extract_attribute_value(tokens[1], input_lines, i, bracket_level)
             barony_attributes[tokens[0].replace(' ', '')] = value
         bracket_level += line.count("{") - line.count("}")

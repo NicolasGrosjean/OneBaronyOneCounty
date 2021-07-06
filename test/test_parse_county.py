@@ -60,6 +60,32 @@ class TestParseCounty(unittest.TestCase):
             '}\n']
         self.assertEqual(new_lines, expected_lines)
 
+    def test_invalid_several_egal(self):
+        with self.assertRaises(Exception):
+            parse_county(['c_machin = {', 'a = b = c', '}'], 0, set())
+
+    def test_valid_several_egal(self):
+        parse_county(['c_machin = { # =', '}'], 0, set())
+
+    def test_valid_several_egal2(self):
+        parse_county(['c_machin = {', 'a = b # = c', '}'], 0, set())
+
+    def test_commented_attribute(self):
+        input_lines = ['c_machin = {\n',
+            '#a = b\n',
+            '\n\tb_bidule = {\n',
+            '\t}\n',
+            '}\n'
+        ]
+        new_lines, i = parse_county(input_lines, 0, set())
+        self.assertEqual(i, 4)
+        expected_lines = ['c_machin = {\n',
+            '\n\tb_bidule = {\n',
+            '\t}\n',
+            '}\n'
+        ]
+        self.assertEqual(new_lines, expected_lines)
+
 
 
 if __name__ == '__main__':
