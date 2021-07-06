@@ -1,5 +1,7 @@
 import re
 
+BARONY_ATTR_TO_NOT_COPY = ['definite_form', 'province']
+
 def one_barony_one_county(input_landed_tile_file_path: str, output_landed_tile_file_path: str):
     with open(input_landed_tile_file_path, 'r') as f:
         input_lines = f.readlines()
@@ -101,11 +103,20 @@ def generate_new_county_lines(county_name: str, county_attributes: dict, baronie
         else:
             new_county_name = get_non_duplicated_county_name(baronies[i]['name'], counties)
         res.append('\t' * tab_nb + "c_" + new_county_name + ' = {\n')
-        for key, value in county_attributes.items():
+        if baronies[i]['name'] == new_county_name:
+            new_county_attributes = baronies[i]['attributes'].copy()
+            for attr in BARONY_ATTR_TO_NOT_COPY:
+                if attr in new_county_attributes:
+                    del new_county_attributes[attr]
+            remove_tab_nb = -1
+        else:
+            new_county_attributes = county_attributes 
+            remove_tab_nb = 0
+        for key, value in new_county_attributes.items():
             if type(value) == list:
                 res.append('\t' * (tab_nb + 1) + key + ' =' + value[0])
                 for val in value[1:]:
-                    res.append(val)
+                    res.append(val[-remove_tab_nb:])
             else:
                 res.append('\t' * (tab_nb + 1) + key + ' =' + value + '\n')
         res.append('\n' + '\t' * (tab_nb + 1) + "b_" + baronies[i]['name'] + ' = {\n')

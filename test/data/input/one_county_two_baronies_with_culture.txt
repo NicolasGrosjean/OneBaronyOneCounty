@@ -86,15 +86,15 @@ e_britannia = {
 				b_southwark = {
 					province = 1526
 
+					color = { 230 5 5 }
+					color2 = { 255 255 255 }
+
 					cultural_names = {
 						anglo_saxon = cn_suthweorc
 						old_saxon = cn_suthweorc
 					}
-
-					color = { 230 5 5 }
-					color2 = { 255 255 255 }
 				}
-            }
-        }
-   }
+			}
+		}
+	}
 }
