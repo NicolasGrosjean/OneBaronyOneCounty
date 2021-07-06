@@ -64,28 +64,30 @@ e_britannia = {
 					province = 1527
 					color = { 230 5 5 }
 					color2 = { 255 255 255 }
-
 					cultural_names = {
 						anglo_saxon = cn_lunden
 						old_saxon = cn_lunden
+
 						roman = cn_londinium
+
 						welsh = cn_llundein
 						cornish = cn_llundein
 						breton = cn_llundein
 						cumbrian = cn_llundein
 						pictish = cn_llundein
+
 						norman = cn_londres
 						scottish = cn_lunnon
 					}
 				}
 			}
 			c_southwark = {
-                color = { 230 5 5 }
-                color2 = { 255 255 255 }
-                cultural_names = {
-                    anglo_saxon = cn_suthweorc
-                    old_saxon = cn_suthweorc
-                }
+				color = { 230 5 5 }
+				color2 = { 255 255 255 }
+				cultural_names = {
+					anglo_saxon = cn_suthweorc
+					old_saxon = cn_suthweorc
+				}
 
 				b_southwark = {
 					province = 1526

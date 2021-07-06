@@ -48,7 +48,8 @@ def parse_county(input_lines: list, line_index: int, counties: set):
                 barony_with_county_name = barony_with_county_name | (barony_name == county_name)
                 baronies.append({'name': barony_name, 'attributes': barony_attributes})
             else:
-                county_attributes[tokens[0].replace(' ', '')] = tokens[1]
+                value, i, bracket_level = extract_attribute_value(tokens[1], input_lines, i, bracket_level)
+                county_attributes[tokens[0].replace(' ', '')] = value
                 bracket_level += line.count("{") - line.count("}")
         else:
             bracket_level += line.count("{") - line.count("}")
@@ -71,21 +72,23 @@ def parse_barony(input_lines: list, line_index: int):
             tokens = line.strip().split('=')
             if len(tokens) > 2:
                 raise Exception(f'Too much = in {line}')
-            key = tokens[0].replace(' ', '')
-            value = tokens[1]
-            if value.count("{") > value.count("}"):
-                value = [value + '\n']
-                i += 1
-                attribute_line = input_lines[i]
-                while '}' not in attribute_line:
-                    value.append(attribute_line)
-                    i += 1
-                    attribute_line = input_lines[i]
-                value.append(attribute_line)
-                bracket_level -= 1
-            barony_attributes[key] = value
+            value, i, bracket_level = extract_attribute_value(tokens[1], input_lines, i, bracket_level)
+            barony_attributes[tokens[0].replace(' ', '')] = value
         bracket_level += line.count("{") - line.count("}")
     return barony_name, barony_attributes, i
+
+def extract_attribute_value(value: str, input_lines:list, i: int, bracket_level: int):
+    if value.count("{") > value.count("}"):
+        value = [value + '\n']
+        i += 1
+        attribute_line = input_lines[i]
+        while '}' not in attribute_line:
+            value.append(attribute_line)
+            i += 1
+            attribute_line = input_lines[i]
+        value.append(attribute_line)
+        bracket_level -= 1
+    return value, i, bracket_level
 
 
 def generate_new_county_lines(county_name: str, county_attributes: dict, baronies: list, barony_with_county_name: bool, counties: set, tab_nb: int):
@@ -99,10 +102,20 @@ def generate_new_county_lines(county_name: str, county_attributes: dict, baronie
             new_county_name = get_non_duplicated_county_name(baronies[i]['name'], counties)
         res.append('\t' * tab_nb + "c_" + new_county_name + ' = {\n')
         for key, value in county_attributes.items():
-            res.append('\t' * (tab_nb + 1) + key + ' =' + value + '\n')
+            if type(value) == list:
+                res.append('\t' * (tab_nb + 1) + key + ' =' + value[0])
+                for val in value[1:]:
+                    res.append(val)
+            else:
+                res.append('\t' * (tab_nb + 1) + key + ' =' + value + '\n')
         res.append('\n' + '\t' * (tab_nb + 1) + "b_" + baronies[i]['name'] + ' = {\n')
         for key, value in baronies[i]['attributes'].items():
-            res.append('\t' * (tab_nb + 2) + key + ' =' + value + '\n')
+            if type(value) == list:
+                res.append('\t' * (tab_nb + 2) + key + ' =' + value[0])
+                for val in value[1:]:
+                    res.append(val)
+            else:
+                res.append('\t' * (tab_nb + 2) + key + ' =' + value + '\n')
         res.append('\t' * (tab_nb + 1) + '}\n')
         res.append('\t' * tab_nb + '}\n')
     return res
