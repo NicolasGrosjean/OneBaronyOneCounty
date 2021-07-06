@@ -3,11 +3,11 @@ import re
 BARONY_ATTR_TO_NOT_COPY = ['definite_form', 'province']
 
 def one_barony_one_county(input_landed_tile_file_path: str, output_landed_tile_file_path: str):
-    with open(input_landed_tile_file_path, 'r') as f:
+    with open(input_landed_tile_file_path, 'r', encoding='utf8') as f:
         input_lines = f.readlines()
     input_lines = format_lines(input_lines)
     edit_lines = parse_and_edit_lines(input_lines)
-    with open(output_landed_tile_file_path, 'w') as f:
+    with open(output_landed_tile_file_path, 'w', encoding='utf8') as f:
         f.writelines(edit_lines)
 
 
@@ -178,4 +178,4 @@ def get_non_duplicated_county_name(county_name: str, counties: set):
 
 
 if __name__ == '__main__':
-    one_barony_one_county('../00_landed_tiles.txt', '../00_landed_tiles_modified.txt')
+    one_barony_one_county('00_landed_titles.txt', '00_landed_titles_modified.txt')
