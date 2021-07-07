@@ -51,7 +51,10 @@ def parse_and_edit_lines(input_lines: list) -> list:
     i = 0
     while i < len(input_lines):
         line = input_lines[i]
-        county_declaration_or_none = re.search('[\t\W]+c_\w*[-\w]*\W*=', line)
+        non_commented_line = line
+        if '#' in line:
+            non_commented_line = line.split('#')[0]
+        county_declaration_or_none = re.search('[\t\W]+c_\w*[-\w]*\W*=', non_commented_line)
         if county_declaration_or_none is None:
             edit_lines.append(line)
         else:

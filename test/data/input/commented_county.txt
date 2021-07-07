@@ -1,0 +1,22 @@
+			#c_weissenburg = {
+			#	color = { 129 129 129 }
+			#	color2 = { 255 255 255 }
+			#	
+			#	b_weissenburg = {
+			#		province = 2724
+			#		
+			#		color = { 129 129 129 }
+			#		color2 = { 255 255 255 }
+			#	}
+			#}
+			c_vaihingen = {
+				color = { 140 140 140 }
+				color2 = { 255 255 255 }
+				
+				b_vaihingen = {
+					province = 2745
+					
+					color = { 140 140 140 }
+					color2 = { 255 255 255 }
+				}
+			}
