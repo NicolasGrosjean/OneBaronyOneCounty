@@ -1,0 +1,98 @@
+			c_durham = {
+				color = { 255 15 15 }
+				color2 = { 255 255 255 }
+				
+				cultural_names = {
+					anglo_saxon = cn_dunholm
+					old_saxon = cn_dunholm
+					norman = cn_duresm
+					french = cn_duresm
+					outremer = cn_duresm
+					occitan = cn_duresm
+				}
+				
+				b_durham = {
+					province = 1606
+					
+					cultural_names = {
+						anglo_saxon = cn_dunholm
+						old_saxon = cn_dunholm
+						norman = cn_duresm
+						french = cn_duresm
+						outremer = cn_duresm
+						occitan = cn_duresm
+						norse = cn_ulfreksfjordr
+						norwegian = cn_ulfreksfjordr
+					}
+
+					color = { 255 15 15 }
+					color2 = { 255 255 255 }
+				}
+				b_hartlepool = {
+					province = 1607
+
+					color = { 255 15 15 }
+					color2 = { 255 255 255 }
+				}
+				b_darlington = {
+					province = 1608
+
+					color = { 255 15 15 }
+					color2 = { 255 255 255 }
+				}
+			}
+			c_cumberland = {
+				color = { 240 25 25 }
+				color2 = { 255 255 255 }
+					
+				cultural_names = {
+					anglo_saxon = cn_cumbraland
+					old_saxon = cn_cumbraland
+				}
+				
+				ai_primary_priority = {
+					if = {
+						limit = {
+							culture = culture:cumbrian
+						}
+						add = @correct_culture_primary_score
+					}
+				}
+	
+				b_carlisle = {
+					province = 1635
+					
+					cultural_names = {
+						cumbrian = cn_caer_luel
+						welsh = cn_caer_luel
+						pictish = cn_caer_luel
+						breton = cn_caer_luel
+						cornish = cn_caer_luel
+						gaelic = cn_cathair_luail
+						irish = cn_cathair_luail
+						anglo_saxon = cn_carleol
+						old_saxon = cn_carleol
+					}
+
+					color = { 240 25 25 }
+					color2 = { 255 255 255 }
+				}
+				b_whitehaven = {
+					province = 1636
+
+					color = { 240 25 25 }
+					color2 = { 255 255 255 }
+				}
+				b_furness = {
+					province = 1642
+
+					color = { 240 25 25 }
+					color2 = { 255 255 255 }
+				}
+				b_wigton = {
+					province = 8780
+
+					color = { 240 25 25 }
+					color2 = { 255 255 255 }
+				}
+			}

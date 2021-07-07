@@ -130,11 +130,14 @@ def extract_attribute_value(value: str, input_lines:list, i: int, bracket_level:
     if value.count("{") > value.count("}"):
         value = [value + '\n']
         i += 1
+        bracket_level += 1
         attribute_line = input_lines[i]
-        while '}' not in attribute_line:
+        bracket_level += attribute_line.count("{") - attribute_line.count("}")
+        while bracket_level > 0:
             value.append(attribute_line)
             i += 1
             attribute_line = input_lines[i]
+            bracket_level += attribute_line.count("{") - attribute_line.count("}")
         value.append(attribute_line)
         bracket_level -= 1
     return value, i, bracket_level
