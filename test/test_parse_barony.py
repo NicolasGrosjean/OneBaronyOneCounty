@@ -41,6 +41,17 @@ class TestParseBarony(unittest.TestCase):
         self.assertEqual(i, 2)
         self.assertEqual(barony_attributes, {})
 
+    def test_commented_attribute2(self):
+        input_lines = ['\tb_machin = {\n',
+            '\t#}\n',
+            '\ta = c\n',
+            '\t}\n'
+        ]
+        barony_name, barony_attributes, i = parse_barony(input_lines, 0)
+        self.assertEqual(barony_name, 'machin')
+        self.assertEqual(i, 3)
+        self.assertEqual(barony_attributes, {'a': ' c'})
+
     def test_complex_barony_name(self):
         barony_name, barony_attributes, i = parse_barony(['b_qaryat-al-asad = {\n', '}\n'], 0)
         self.assertEqual(barony_name, 'qaryat-al-asad')

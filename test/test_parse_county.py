@@ -114,6 +114,23 @@ class TestParseCounty(unittest.TestCase):
         self.assertEqual(i, 3)
         self.assertEqual(new_lines, input_lines)
 
+    def test_commented_barony(self):
+        input_lines = ['c_zemigalians = {\n',
+            '\n#\tb_riga = {\n',
+            '\t#}\n',
+            '\n\tb_riga = {\n',
+            '\t}\n',
+            '}\n'
+        ]
+        new_lines, i = parse_county(input_lines, 0, set())
+        self.assertEqual(i, 5)
+        expected_lines = ['c_zemigalians = {\n',
+            '\n\tb_riga = {\n',
+            '\t}\n',
+            '}\n'
+        ]
+        self.assertEqual(new_lines, expected_lines)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -95,6 +95,8 @@ def parse_county(input_lines: list, line_index: int, counties: set):
                 county_attributes[tokens[0].replace(' ', '')] = value
                 bracket_level += line.count("{") - line.count("}")
         else:
+            if '#' in line:
+                line = line.split('#')[0]
             bracket_level += line.count("{") - line.count("}")
     new_lines = generate_new_county_lines(county_name, county_attributes, baronies, barony_with_county_name, counties, tab_nb)
     counties.add(county_name)
@@ -123,6 +125,8 @@ def parse_barony(input_lines: list, line_index: int):
                 continue
             value, i, bracket_level = extract_attribute_value(tokens[1], input_lines, i, bracket_level)
             barony_attributes[tokens[0].replace(' ', '')] = value
+        if '#' in line:
+            line = line.split('#')[0]
         bracket_level += line.count("{") - line.count("}")
     return barony_name, barony_attributes, i
 
