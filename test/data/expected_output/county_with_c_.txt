@@ -1,0 +1,10 @@
+	c_coptic_papacy = {
+		color = { 217 155 177 }
+		color2 = { 220 220 0 }
+
+		b_coptic_papacy = {
+			province = 42
+			color = { 217 155 177 }
+			color2 = { 220 220 0 }
+		}
+	}
