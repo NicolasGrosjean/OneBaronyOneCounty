@@ -29,7 +29,8 @@ class TestOneBaronyOneCounty(unittest.TestCase):
             output_lines = f.readlines()
         with open(os.path.join(self.data_dir, 'expected_output', filename), 'r') as f:
             expected_output_lines = f.readlines()
-        for i in range(min(len(output_lines), len(expected_output_lines))):
+        self.assertEqual(len(output_lines), len(expected_output_lines))
+        for i in range(len(output_lines)):
             self.assertEqual(output_lines[i].replace('\t', '').replace('\n', ''),
                                 expected_output_lines[i].replace('\t', '').replace('\n', ''),
                                 f'Issue line {i + 1}')
