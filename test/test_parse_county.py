@@ -104,6 +104,15 @@ class TestParseCounty(unittest.TestCase):
         self.assertEqual(i, 11)
         self.assertEqual(new_lines, input_lines)
 
+    def test_complex_names(self):
+        input_lines = ['c_qaryat-al-asad = {\n',
+            '\n\tb_qaryat-al-asad = {\n',
+            '\t}\n',
+            '}\n'
+        ]
+        new_lines, i = parse_county(input_lines, 0, set())
+        self.assertEqual(i, 3)
+        self.assertEqual(new_lines, input_lines)
 
 
 if __name__ == '__main__':

@@ -41,6 +41,12 @@ class TestParseBarony(unittest.TestCase):
         self.assertEqual(i, 2)
         self.assertEqual(barony_attributes, {})
 
+    def test_complex_barony_name(self):
+        barony_name, barony_attributes, i = parse_barony(['b_qaryat-al-asad = {\n', '}\n'], 0)
+        self.assertEqual(barony_name, 'qaryat-al-asad')
+        self.assertEqual(i, 1)
+        self.assertEqual(barony_attributes, {})
+
 
 if __name__ == '__main__':
     unittest.main()
