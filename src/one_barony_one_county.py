@@ -39,10 +39,10 @@ def need_format(line: str) -> bool:
     """
     Return true if line as a title declaration followed by content
     """
-    return (re.search('\t+e_\w*[-\w]*\W*=', line) is not None and re.search('\t+e_\w*[-\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+e_\w*[-\w]*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+k_\w*[-\w]*\W*=', line) is not None and re.search('\t+k_\w*[-\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+k_\w*[-\w]*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+d_\w*[-\w]*\W*=', line) is not None and re.search('\t+d_\w*[-\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+d_\w*[-\w]*\W*=\W*{\W*#', line) is None) or \
-        (re.search('\t+c_\w*[-\w]*\W*=', line) is not None and re.search('\t+c_\w*[-\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+c_\w*[-\w]*\W*=\W*{\W*#', line) is None)
+    return (re.search('\t+e_\w*[-\'\w]*\W*=', line) is not None and re.search('\t+e_\w*[-\'\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+e_\w*[-\'\w]*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+k_\w*[-\'\w]*\W*=', line) is not None and re.search('\t+k_\w*[-\'\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+k_\w*[-\'\w]*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+d_\w*[-\'\w]*\W*=', line) is not None and re.search('\t+d_\w*[-\'\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+d_\w*[-\'\w]*\W*=\W*{\W*#', line) is None) or \
+        (re.search('\t+c_\w*[-\'\w]*\W*=', line) is not None and re.search('\t+c_\w*[-\'\w]*\W*=\W*{[\w\t]*\n', line) is None and re.search('\t+c_\w*[-\'\w]*\W*=\W*{\W*#', line) is None)
 
 
 def parse_and_edit_lines(input_lines: list) -> list:
@@ -54,7 +54,7 @@ def parse_and_edit_lines(input_lines: list) -> list:
         non_commented_line = line
         if '#' in line:
             non_commented_line = line.split('#')[0]
-        county_declaration_or_none = re.search('[\t\W]+c_\w*[-\w]*\W*=', non_commented_line)
+        county_declaration_or_none = re.search('[\t\W]+c_\w*[-\'\w]*\W*=', non_commented_line)
         if county_declaration_or_none is None:
             edit_lines.append(line)
         else:
@@ -68,7 +68,7 @@ def parse_and_edit_lines(input_lines: list) -> list:
 def parse_county(input_lines: list, line_index: int, counties: set):
     i = line_index
     line = input_lines[i]
-    county_match = re.search('c_\w*[-\w]*', line).regs[0]
+    county_match = re.search('c_\w*[-\'\w]*', line).regs[0]
     county_name = line[county_match[0]:county_match[1]][2:]
     tab_nb = line.count('\t')
     county_attributes = dict()
@@ -109,7 +109,7 @@ def parse_county(input_lines: list, line_index: int, counties: set):
 def parse_barony(input_lines: list, line_index: int):
     i = line_index
     line = input_lines[i]
-    barony_match = re.search('b_\w*[-\w]*', line).regs[0]
+    barony_match = re.search('b_\w*[-\'\w]*', line).regs[0]
     barony_name = line[barony_match[0]:barony_match[1]][2:]
     barony_attributes = dict()
     bracket_level = 0
