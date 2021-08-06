@@ -1,0 +1,55 @@
+			c_sarkel = {
+				color = { 125 80 18 }
+				color2 = { 255 255 255 }
+
+				b_sarkel = {
+					province = 607
+					color = { 125 80 18 }
+					color2 = { 255 255 255 }
+				}
+			}
+			c_aksay2 = {
+				color = { 125 80 18 }
+				color2 = { 255 255 255 }
+
+				b_aksay = {
+					province = 5315
+					color = { 125 80 18 }
+					color2 = { 255 255 255 }
+				}
+			}
+			c_semikarakary = {
+				color = { 125 80 18 }
+				color2 = { 255 255 255 }
+
+				b_semikarakary = {
+					province = 5332
+					color = { 125 80 18 }
+					color2 = { 255 255 255 }
+				}
+			}
+			c_aksay = {
+				color = { 55 29 191 }
+				color2 = { 255 255 255 }
+
+				b_aksay_tibet = {
+					province = 9472
+					color = { 55 29 191 }
+					color2 = { 255 255 255 }
+					cultural_names = {
+						kirghiz = cn_aqsai
+						uyghur = cn_aqsai			
+						han = cn_akesai
+					}
+				}
+			}
+			c_hahaeci = {
+				color = { 55 29 191 }
+				color2 = { 255 255 255 }
+
+				b_hahaeci = {
+					province = 9471
+					color = { 55 29 191 }
+					color2 = { 255 255 255 }
+				}
+			}
