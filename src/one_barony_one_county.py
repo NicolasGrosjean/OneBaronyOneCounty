@@ -9,7 +9,8 @@ def one_barony_one_county(
     with open(input_landed_tile_file_path, "r", encoding="utf8") as f:
         input_lines = f.readlines()
     input_lines = format_lines(input_lines)
-    edit_lines = parse_and_edit_lines(input_lines)
+    all_counties = list_all_counties(input_lines)
+    edit_lines = parse_and_edit_lines(input_lines, all_counties)
     with open(output_landed_tile_file_path, "w", encoding="utf8") as f:
         f.writelines(edit_lines)
 
@@ -40,6 +41,18 @@ def format_lines(lines: list) -> list:
         return res
 
 
+def list_all_counties(lines: list) -> set:
+    res = set()
+    for line in lines:
+        non_commented_line = line
+        if "#" in line:
+            non_commented_line = line.split("#")[0]
+        if re.search("[\t\W]+c_\w*[-'\w]*\W*=", non_commented_line) is not None:
+            county_match = re.search("c_\w*[-'\w]*", line).regs[0]
+            res.add(line[county_match[0] : county_match[1]][2:])
+    return res
+
+
 def need_format(line: str) -> bool:
     """
     Return true if line as a title declaration followed by content
@@ -68,8 +81,7 @@ def need_format(line: str) -> bool:
     )
 
 
-def parse_and_edit_lines(input_lines: list) -> list:
-    counties = set()
+def parse_and_edit_lines(input_lines: list, all_counties: set) -> list:
     edit_lines = []
     i = 0
     while i < len(input_lines):
@@ -83,7 +95,7 @@ def parse_and_edit_lines(input_lines: list) -> list:
         if county_declaration_or_none is None:
             edit_lines.append(line)
         else:
-            county_edit_lines, i = parse_county(input_lines, i, counties)
+            county_edit_lines, i = parse_county(input_lines, i, all_counties)
             for line in county_edit_lines:
                 edit_lines.append(line)
         i += 1
@@ -91,7 +103,7 @@ def parse_and_edit_lines(input_lines: list) -> list:
 
 
 # https://ck3.paradoxwikis.com/Title_modding#List_of_attributes
-def parse_county(input_lines: list, line_index: int, counties: set):
+def parse_county(input_lines: list, line_index: int, all_counties: set):
     i = line_index
     line = input_lines[i]
     county_match = re.search("c_\w*[-'\w]*", line).regs[0]
@@ -136,10 +148,9 @@ def parse_county(input_lines: list, line_index: int, counties: set):
         county_attributes,
         baronies,
         barony_with_county_name,
-        counties,
+        all_counties,
         tab_nb,
     )
-    counties.add(county_name)
     return new_lines, i
 
 
@@ -195,21 +206,32 @@ def generate_new_county_lines(
     county_attributes: dict,
     baronies: list,
     barony_with_county_name: bool,
-    counties: set,
+    all_counties: set,
     tab_nb: int,
 ):
     res = []
     for i in range(len(baronies)):
         if i == 0:
-            # Ensure the original county name is kept
-            new_county_name = get_non_duplicated_county_name(
-                baronies[0]["name"] if barony_with_county_name else county_name,
-                counties,
-            )
+            # Ensure the original county name is kept (do not replace by barony name)
+            if not barony_with_county_name or baronies[0]["name"] == county_name:
+                new_county_name = get_non_duplicated_county_name(
+                    county_name,
+                    set(),
+                )
+            else:
+                new_county_name = get_non_duplicated_county_name(
+                    baronies[i]["name"], all_counties
+                )
         else:
-            new_county_name = get_non_duplicated_county_name(
-                baronies[i]["name"], counties
-            )
+            # Ensure the original county name is kept (do not add suffix)
+            if baronies[i]["name"] == county_name:
+                new_county_name = get_non_duplicated_county_name(
+                    baronies[i]["name"], set()
+                )
+            else:
+                new_county_name = get_non_duplicated_county_name(
+                    baronies[i]["name"], all_counties
+                )
         res.append("\t" * tab_nb + "c_" + new_county_name + " = {\n")
         if baronies[i]["name"] == new_county_name:
             new_county_attributes = baronies[i]["attributes"].copy()
